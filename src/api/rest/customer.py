@@ -3,7 +3,7 @@ from ...dto.customer import CustomerDTO
 from ..dependencies import get_create_customer_use_case
 from ...use_cases.create_customer import CreateCustomerUseCase
 
-router = APIRouter(prefix="/customers")
+router = APIRouter(prefix="/customers", tags=["Customers"])
 
 @router.post("/")
 def create_customer(
