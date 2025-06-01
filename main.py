@@ -1,13 +1,16 @@
-from typing import Union
+import os
+import uvicorn
+from fastapi import APIRouter
+from src.create_app import create_app
+from src.controllers.health import router as health_router
 
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/")
-def read_root():
-  return "hello world"
-
-@app.get("/items/{items_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-  return { "item_id": item_id, "q": q }
+if __name__ == "__main__":
+  app = create_app("invoice-management-api")
+  
+  router = APIRouter(prefix="/api/v1")
+  router.include_router(health_router)
+  
+  app.include_router(router)
+    
+  port = int(os.getenv("PORT", 8000))
+  uvicorn.run(app, host="0.0.0.0", port=port)
