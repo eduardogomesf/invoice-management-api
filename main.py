@@ -1,7 +1,7 @@
 import os
 import uvicorn
 from src.create_app import create_app, load_routes
-from src.controllers import get_routers
+from src.api.rest import get_routers
 
 if __name__ == "__main__":
   app = create_app("invoice-management-api")
